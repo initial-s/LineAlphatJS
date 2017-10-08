@@ -1,0 +1,47 @@
+        return contactMember.map((z) => {
+                return { displayName: z.displayName, mid: z.mid };
+            });
+    }
+
+    removeReaderByGroup(groupID) {
+        const groupIndex = this.checkReader.findIndex(v => {
+            if(v.group == groupID) {
+                return v
+            }
+        })
+
+        if(groupIndex != -1) {
+            this.checkReader.splice(groupIndex,1);
+        }
+    }
+
+    async textMessage(textMessages, seq) {
+        let [ cmd, ...payload ] = textMessages.split(' ');
+        payload = payload.join(' ');
+        let txt = textMessages.toLowerCase();
+        let messageID = seq.id;
+
+        if(cmd == 'cancel') {
+            if(payload == 'group') {
+                let groupid = await this._getGroupsInvited();
+                for (let i = 0; i < groupid.length; i++) {
+                    this._rejectGroupInvitation(groupid[i])                    
+                }
+                return;
+            }
+            if(this.stateStatus.cancel == 1) {
+                this.cancelAll(seq.to);
+            }
+        }
+
+        if(txt == 'hallo' || txt == 'salken') {
+            this._sendMessage(seq, 'salken ka2 :)');
+        }
+
+        if(txt == 'pagi' || txt == 'siang') {
+            this._sendMessage(seq, 'awalilah harimu dengan bismillah :)');
+        }
+
+        if(txt == 'assalamuallaikum' || txt == 'asalamuallaikum') {
+            this._sendMessage(seq, 'waalaikumsallam:)');
+        }
