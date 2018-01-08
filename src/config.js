@@ -15,6 +15,7 @@ const config = {
   LINE_SESSION_LINE_URL: '/authct/v1/keys/line',
   LINE_SESSION_NAVER_URL: '/authct/v1/keys/naver',
   LINE_POST_CONTENT_URL: 'https://os.line.naver.jp/talk/m/upload.nhn',
+  X_LINE_APP: 'IOSIPAD 6.0.0 iPhone OS 9.0.2',
   ip: '127.0.0.1',
   version: '0.0.2',
   revision: 0,
